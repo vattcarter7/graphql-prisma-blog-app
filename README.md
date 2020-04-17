@@ -1,0 +1,1 @@
+### blog app made with GRAPHQL & PRISMA 
