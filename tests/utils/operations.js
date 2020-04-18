@@ -1,6 +1,7 @@
 import { gql } from 'apollo-boost';
 
 // user operations
+
 const createUser = gql`
   mutation($data: CreateUserInput!) {
     createUser(data: $data) {
@@ -41,6 +42,7 @@ const getProfile = gql`
 `;
 
 // post operations
+
 const getPosts = gql`
   query {
     posts {
@@ -93,10 +95,34 @@ const deletePost = gql`
   }
 `;
 
+// comment operations
+
 const deleteComment = gql`
   mutation($id: ID!) {
     deleteComment(id: $id) {
       id
+    }
+  }
+`;
+
+// subscription operations
+
+const subscribeToComment = gql`
+  subscription($postId: ID!) {
+    comment(postId: $postId) {
+      mutation
+      node {
+        id
+        text
+      }
+    }
+  }
+`;
+
+const subscribeToPosts = gql`
+  subscription {
+    post {
+      mutation
     }
   }
 `;
@@ -111,5 +137,7 @@ export {
   updatePost,
   createPost,
   deletePost,
-  deleteComment
+  deleteComment,
+  subscribeToComment,
+  subscribeToPosts
 };
